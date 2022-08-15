@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useAllPost from "./fetchData/useAllPost";
-import { createPost, updatePost } from "./store/actions/postAction";
+import { createPost, updatePost, deletePost } from "./store/actions/postAction";
 import formData from "./formData.json";
 
 import "./App.css";
@@ -13,7 +13,7 @@ function App() {
   // fetch post data
   const allPost = useAllPost();
 
-  console.log("postState in app.js ::", postState.postStateData);
+  // console.log("postState in app.js ::", postState.postStateData);
 
   // create post handler
   const createPostHandler = (data) => {
@@ -28,6 +28,12 @@ function App() {
     };
 
     dispatch(updatePost(id, updateData));
+  };
+
+  // delete post handler
+  const deletePostHandler = (id) => {
+    console.log("delete post handler ::", id);
+    dispatch(deletePost(id));
   };
 
   // post loading
@@ -60,6 +66,11 @@ function App() {
       {/* update post  */}
       <div className="update_post">
         <button onClick={() => updatePostHandler(1)}>Update Post</button>
+      </div>
+
+      {/* delete post  */}
+      <div className="delete_post">
+        <button onClick={() => deletePostHandler(1)}>Delete Post</button>
       </div>
     </div>
   );

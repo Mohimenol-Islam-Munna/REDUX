@@ -30,7 +30,7 @@
 
 .update_post {
   margin: 20px 0px;
-  background-color: salmon;
+  background-color: yellowgreen;
   padding: 20px;
   overflow-y: auto;
 }
@@ -40,5 +40,20 @@
 }
 
 .update_post > button:hover {
+  cursor: pointer;
+}
+
+.delete_post {
+  margin: 20px 0px;
+  background-color: salmon;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.delete_post > button {
+  padding: 10px 20px;
+}
+
+.delete_post > button:hover {
   cursor: pointer;
 }

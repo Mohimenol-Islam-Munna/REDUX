@@ -78,3 +78,21 @@ export const updatePost = (id, data) => async (dispatch) => {
     dispatch({ type: UPDATE_POST_LOADING, payload: false });
   }
 };
+
+export const deletePost = (id) => async (dispatch) => {
+  dispatch({ type: DELETE_POST_LOADING, payload: true });
+  try {
+    // @@@@@@ uncomment this below code while you have valid update api
+    // const res = await axios.delete(`${baseUrl}/delete/${id}`, {
+    //   headers: {
+    //     Authorizaton: "Bearer paste your authorization token here",
+    //   },
+    // });
+
+    dispatch({ type: DELETE_POST_SUCCESS, payload: id });
+  } catch (err) {
+    dispatch({ type: DELETE_POST_ERROR, payload: err.message });
+  } finally {
+    dispatch({ type: DELETE_POST_LOADING, payload: false });
+  }
+};

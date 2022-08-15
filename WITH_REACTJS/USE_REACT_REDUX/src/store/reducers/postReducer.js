@@ -137,17 +137,41 @@ const postReducer = (state = initialState, action) => {
       };
 
     case UPDATE_POST_ERROR:
-      return state;
+      return {
+        ...state,
+        updatePostError: {
+          status: true,
+          message: payload,
+        },
+      };
 
     // delete post
     case DELETE_POST_LOADING:
-      return state;
+      return {
+        ...state,
+        isDeletePostLoading: payload,
+      };
 
     case DELETE_POST_SUCCESS:
-      return state;
+      const afterDelete = state.postStateData.filter(
+        (post) => post.id !== payload
+      );
+
+      console.log("afterDelete ::", afterDelete);
+
+      return {
+        ...state,
+        postStateData: afterDelete,
+      };
 
     case DELETE_POST_ERROR:
-      return state;
+      return {
+        ...state,
+        deletePostError: {
+          status: true,
+          message: payload,
+        },
+      };
 
     default:
       return state;
