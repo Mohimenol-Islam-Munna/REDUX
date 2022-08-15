@@ -10,7 +10,7 @@ const getAllPost = () => async (dispatch) => {
       },
     });
 
-    dispatch({ type: GET_ALL_POST, payload: res });
+    // dispatch({ type: GET_ALL_POST, payload: res });
   } catch (err) {
   } finally {
   }
