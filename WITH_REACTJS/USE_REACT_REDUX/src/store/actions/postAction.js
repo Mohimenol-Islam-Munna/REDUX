@@ -23,7 +23,7 @@ export const createPost = (data) => async (dispatch) => {
   dispatch({ type: CREATE_POST_LOADING, payload: true });
 
   try {
-    // @@@@@@ uncomment this below code while you have valid create api 
+    // @@@@@@ uncomment this below code while you have valid create api
     // const res = await axios.post(`${baseUrl}/createPost`, data, {
     //   headers: {
     //     Authorization: "Bearer paste your authorization token here",
@@ -50,12 +50,31 @@ export const getAllPost = () => async (dispatch) => {
       },
     });
 
-    console.log("post data fetch success full ::", res);
-
     dispatch({ type: ALL_POST_SUCCESS, payload: res.data });
   } catch (err) {
     dispatch({ type: ALL_POST_ERROR, payload: err.message });
   } finally {
     dispatch({ type: ALL_POST_LOADING, payload: false });
+  }
+};
+
+// update post
+export const updatePost = (id, data) => async (dispatch) => {
+  dispatch({ type: UPDATE_POST_LOADING, payload: true });
+
+  try {
+    // @@@@@@ uncomment this below code while you have valid update api
+    // const res = await axios.patch(`${baseUrl}/updatePost/${id}`, data, {
+    //   headers: {
+    //     Authorization: "Bearer paste yuor token here",
+    //     "Content-type": "application/json",
+    //   },
+    // });
+
+    dispatch({ type: UPDATE_POST_SUCCESS, payload: { id, data } });
+  } catch (err) {
+    dispatch({ type: UPDATE_POST_ERROR, payload: err.message });
+  } finally {
+    dispatch({ type: UPDATE_POST_LOADING, payload: false });
   }
 };

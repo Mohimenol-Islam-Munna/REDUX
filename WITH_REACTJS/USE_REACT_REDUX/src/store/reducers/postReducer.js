@@ -114,10 +114,27 @@ const postReducer = (state = initialState, action) => {
 
     // update post
     case UPDATE_POST_LOADING:
-      return state;
+      return {
+        ...state,
+        isUpdatePostLoading: payload,
+      };
 
     case UPDATE_POST_SUCCESS:
-      return state;
+      const { id, data } = payload;
+
+      const newPostStateData = [...state.postStateData];
+
+      const selectedPostIndex = newPostStateData.findIndex(
+        (post) => post.id === id
+      );
+
+      newPostStateData[selectedPostIndex].title = data.title;
+      newPostStateData[selectedPostIndex].body = data.body;
+
+      return {
+        ...state,
+        postStateData: newPostStateData,
+      };
 
     case UPDATE_POST_ERROR:
       return state;

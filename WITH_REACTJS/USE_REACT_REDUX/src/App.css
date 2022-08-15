@@ -27,3 +27,18 @@
 .create_post > button:hover {
   cursor: pointer;
 }
+
+.update_post {
+  margin: 20px 0px;
+  background-color: salmon;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.update_post > button {
+  padding: 10px 20px;
+}
+
+.update_post > button:hover {
+  cursor: pointer;
+}
