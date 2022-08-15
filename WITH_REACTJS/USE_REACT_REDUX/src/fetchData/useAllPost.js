@@ -8,8 +8,6 @@ const useAllPost = () => {
   useEffect(() => {
     dispatch(getAllPost());
   }, []);
-
-  return;
 };
 
 export default useAllPost;

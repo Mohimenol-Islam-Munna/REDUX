@@ -28,6 +28,9 @@ export const getAllPost = () => async (dispatch) => {
         "Content-type": "application/json",
       },
     });
+
+    console.log("post data fetch success full ::", res);
+
     dispatch({ type: ALL_POST_SUCCESS, payload: res.data });
   } catch (err) {
     dispatch({ type: ALL_POST_ERROR, payload: err.message });

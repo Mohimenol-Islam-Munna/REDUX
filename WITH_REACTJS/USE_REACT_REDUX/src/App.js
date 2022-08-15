@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllPost } from "./store/actions/postAction";
+import React from "react";
+import { useSelector } from "react-redux";
+import useAllPost from "./fetchData/useAllPost";
 import "./App.css";
 
 function App() {
   const post = useSelector((store) => store.post);
-  const dispatch = useDispatch();
+  const allPost = useAllPost();
 
   console.log("post state in app.js ::", post);
-
-  useEffect(() => {
-    dispatch(getAllPost());
-  }, []);
 
   return (
     <div className="App">
