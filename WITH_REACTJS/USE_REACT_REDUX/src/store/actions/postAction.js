@@ -18,6 +18,27 @@ import {
   DELETE_POST_ERROR,
 } from "./actionTypes";
 
+// create post
+export const createPost = (data) => async (dispatch) => {
+  dispatch({ type: CREATE_POST_LOADING, payload: true });
+
+  try {
+    // @@@@@@ uncomment this below code while you have valid create api 
+    // const res = await axios.post(`${baseUrl}/createPost`, data, {
+    //   headers: {
+    //     Authorization: "Bearer paste your authorization token here",
+    //     "Content-type": "application/json",
+    //   },
+    // });
+
+    dispatch({ type: CREATE_POST_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: CREATE_POST_ERROR, payload: err.message });
+  } finally {
+    dispatch({ type: CREATE_POST_LOADING, payload: false });
+  }
+};
+
 // get all post from server
 export const getAllPost = () => async (dispatch) => {
   dispatch({ type: ALL_POST_LOADING, payload: true });

@@ -50,7 +50,7 @@ const initialState = {
     message: null,
   },
 
-  postStateData: null,
+  postStateData: [],
 };
 
 const postReducer = (state = initialState, action) => {
@@ -60,13 +60,25 @@ const postReducer = (state = initialState, action) => {
   switch (type) {
     // create post
     case CREATE_POST_LOADING:
-      return state;
+      return {
+        ...state,
+        isCreatePostLoading: payload,
+      };
 
     case CREATE_POST_SUCCESS:
-      return state;
+      return {
+        ...state,
+        postStateData: [...state.postStateData, payload],
+      };
 
     case CREATE_POST_ERROR:
-      return state;
+      return {
+        ...state,
+        createPostError: {
+          status: true,
+          message: payload,
+        },
+      };
 
     // all post
     case ALL_POST_LOADING:
