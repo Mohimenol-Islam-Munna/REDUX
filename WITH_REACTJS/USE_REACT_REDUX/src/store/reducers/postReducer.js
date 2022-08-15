@@ -157,8 +157,6 @@ const postReducer = (state = initialState, action) => {
         (post) => post.id !== payload
       );
 
-      console.log("afterDelete ::", afterDelete);
-
       return {
         ...state,
         postStateData: afterDelete,
