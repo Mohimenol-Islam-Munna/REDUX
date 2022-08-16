@@ -69,6 +69,10 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         postStateData: [...state.postStateData, payload],
+        createPostError: {
+          status: false,
+          message: null,
+        },
       };
 
     case CREATE_POST_ERROR:
@@ -91,6 +95,10 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         postStateData: payload,
+        allPostError: {
+          status: false,
+          message: null,
+        },
       };
 
     case ALL_POST_ERROR:
@@ -134,6 +142,10 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         postStateData: newPostStateData,
+        updatePostError: {
+          status: false,
+          message: null,
+        },
       };
 
     case UPDATE_POST_ERROR:
@@ -160,6 +172,10 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         postStateData: afterDelete,
+        deletePostError: {
+          status: false,
+          message: null,
+        },
       };
 
     case DELETE_POST_ERROR:
