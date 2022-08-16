@@ -9,7 +9,7 @@ const App = () => {
   const { isLoading: isUserLoading, data } = useGetUserQuery();
 
   console.log("user create isLoading ::", isLoading);
-  // console.log("user data ::", data);
+  console.log("user data ::", data);
 
   // create post handler
   const createUserHandler = async (data) => {
