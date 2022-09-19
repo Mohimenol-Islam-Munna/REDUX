@@ -15,7 +15,7 @@ import {
   updateUserError,
   updateUserSuccess,
   deleteUserLoading,
-  deleteUserError,
+  deleteUserError, 
   deleteUserSuccess,
 } from "../slices/usersSlice";
 
