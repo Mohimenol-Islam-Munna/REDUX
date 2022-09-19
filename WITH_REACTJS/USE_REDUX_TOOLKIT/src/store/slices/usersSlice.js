@@ -62,8 +62,6 @@ const usersSlice = createSlice({
     },
 
     createUserSuccess: (state, { type, payload }) => {
-      console.log("create user success payload ::", payload);
-
       // state.users.data.data.push(payload.data);
       state.users.data.data = [...state.users.data.data, payload.data];
     },
@@ -78,27 +76,35 @@ const usersSlice = createSlice({
     },
 
     updateUserSuccess: (state, { type, payload }) => {
-      // use current mathod to print state in reducer action otherwise its print Proxy
-      console.log("state ::", current(state));
+      // use current() mathod to print state in reducer action otherwise its print Proxy
+      // console.log("state ::", current(state));
 
-      const copyState = state.users.data.data;
-
-      let selectedIndex = copyState.findIndex((user) => user.id == payload.id);
+      const newState = [...state.users.data.data];
+      let selectedIndex = newState.findIndex((user) => user.id == payload.id);
 
       if (selectedIndex !== -1) {
-        copyState[selectedIndex].email = "munna.cse.pust@gmail.com";
-        copyState[selectedIndex].first_name = payload.data.name;
+        newState[selectedIndex].email = "munna33.cse.pust@gmail.com";
+        newState[selectedIndex].first_name = payload.data.name;
+        state.users.data.data = newState;
       }
     },
 
     // delete user
-    deleteUserLoading: (state) => {
-      state.deleteUserLoading = true;
+    deleteUserLoading: (state, { type, payload }) => {
+      state.deleteUserLoading = payload;
     },
 
-    deleteUserError: (state, action) => {},
+    deleteUserError: (state, { type, payload }) => {
+      state.deleteUserError = payload;
+    },
 
-    deleteUserSuccess: (state, action) => {},
+    deleteUserSuccess: (state, { type, payload }) => {
+      let othersUser = state.users.data.data.filter(
+        (user) => user.id !== payload.id
+      );
+
+      state.users.data.data = othersUser;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -119,6 +125,10 @@ export const {
   updateUserLoading,
   updateUserError,
   updateUserSuccess,
+
+  deleteUserLoading,
+  deleteUserError,
+  deleteUserSuccess,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -6,6 +6,7 @@ import {
   fetchOneUserActionHandler,
   createUserActionHandler,
   updateUserActionHandler,
+  deleteUserActionHandler,
 } from "./store/actions/usersActions";
 
 function App() {
@@ -67,6 +68,12 @@ function App() {
           }
         >
           Update User
+        </button>
+      </div>
+
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={() => dispatch(deleteUserActionHandler(8))}>
+          Delete User
         </button>
       </div>
     </div>

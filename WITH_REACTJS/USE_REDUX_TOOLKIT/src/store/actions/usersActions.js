@@ -14,6 +14,9 @@ import {
   updateUserLoading,
   updateUserError,
   updateUserSuccess,
+  deleteUserLoading,
+  deleteUserError,
+  deleteUserSuccess,
 } from "../slices/usersSlice";
 
 // fetch all
@@ -78,4 +81,20 @@ export const updateUserActionHandler = (data) => async (dispatch) => {
   }
 
   dispatch(updateUserLoading(false));
+};
+
+// delete
+export const deleteUserActionHandler = (id) => async (dispatch) => {
+  dispatch(deleteUserLoading(true));
+
+  try {
+    let res = await axios.delete(`${baseUrl}/api/users/${id}`);
+    dispatch(deleteUserError(null));
+    dispatch(deleteUserSuccess({ id: id }));
+  } catch (err) {
+    dispatch(deleteUserError({ status: true, message: err }));
+    dispatch(deleteUserSuccess(null));
+  }
+
+  dispatch(deleteUserLoading(false));
 };
