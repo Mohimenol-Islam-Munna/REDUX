@@ -1,1 +1,3 @@
-export default baseURL = "https://reqres.in/";
+const baseUrl = "https://reqres.in";
+
+export default baseUrl;

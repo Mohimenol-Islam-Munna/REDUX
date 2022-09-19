@@ -1,5 +1,5 @@
 import axios from "axios";
-import baseURL from "../../utils/baseUrl";
+import baseUrl from "../../utils/baseUrl";
 
 import {
   fetchAllUserLoading,
@@ -11,10 +11,13 @@ export const fetchAllUserActionHandler = () => async (dispatch) => {
   dispatch(fetchAllUserLoading(true));
 
   try {
-    let res = await axios.get(`${baseURL}/api/users?page=2`);
-
-    console.log("res ::", res);
+    let res = await axios.get(`${baseUrl}/api/users?page=2`);
+    dispatch(fetchAllUserError(null));
+    dispatch(fetchAllUserSuccess({ data: res.data }));
   } catch (err) {
-    console.log("error ::", err);
+    dispatch(fetchAllUserError({ status: true, message: err }));
+    dispatch(fetchAllUserSuccess(null));
   }
+
+  dispatch(fetchAllUserLoading(false));
 };

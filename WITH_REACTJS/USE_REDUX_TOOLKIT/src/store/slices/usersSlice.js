@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "users",
-  description: "Users Slice",
+  description: "Users State",
 
   fetchAllUserLoading: false,
   fetchOneUserLoading: false,
@@ -32,14 +32,11 @@ const usersSlice = createSlice({
     },
 
     fetchAllUserError: (state, { type, payload }) => {
-      state.fetchAllUserError = {
-        status: payload.status,
-        message: payload.message,
-      };
+      state.fetchAllUserError = payload;
     },
 
     fetchAllUserSuccess: (state, { type, payload }) => {
-      state.users = payload.data;
+      state.users = payload;
     },
 
     // fetch one
