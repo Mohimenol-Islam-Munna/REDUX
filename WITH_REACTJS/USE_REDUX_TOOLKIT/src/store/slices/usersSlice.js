@@ -18,7 +18,7 @@ const initialState = {
   updateUserError: null,
   deleteUserError: null,
 
-  usersList: null,
+  users: null,
   user: null,
 };
 
@@ -28,7 +28,7 @@ const usersSlice = createSlice({
   reducers: {
     // fetch all
     fetchAllUserLoading: (state, { type, payload }) => {
-      state.fetchAllUserLoading = payload.status;
+      state.fetchAllUserLoading = payload;
     },
 
     fetchAllUserError: (state, { type, payload }) => {
@@ -39,9 +39,10 @@ const usersSlice = createSlice({
     },
 
     fetchAllUserSuccess: (state, { type, payload }) => {
-      state.usersList = payload.data;
+      state.users = payload.data;
     },
 
+    // fetch one
     fetchOneUserLoading: (state) => {
       state.fetchOneUserLoading = true;
     },
@@ -68,3 +69,8 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {},
 });
+
+export const { fetchAllUserLoading, fetchAllUserError, fetchAllUserSuccess } =
+  usersSlice.actions;
+
+export default usersSlice.reducer;
