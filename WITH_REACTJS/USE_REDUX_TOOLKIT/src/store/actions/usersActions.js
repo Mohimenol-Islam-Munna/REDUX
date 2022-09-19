@@ -5,6 +5,9 @@ import {
   fetchAllUserLoading,
   fetchAllUserError,
   fetchAllUserSuccess,
+  fetchOneUserError,
+  fetchOneUserSuccess,
+  fetchOneUserLoading,
 } from "../slices/usersSlice";
 
 export const fetchAllUserActionHandler = () => async (dispatch) => {
@@ -20,4 +23,19 @@ export const fetchAllUserActionHandler = () => async (dispatch) => {
   }
 
   dispatch(fetchAllUserLoading(false));
+};
+
+export const fetchOneUserActionHandler = () => async (dispatch) => {
+  dispatch(fetchOneUserLoading(true));
+
+  try {
+    let res = await axios.get(`${baseUrl}/api/users/2`);
+    dispatch(fetchOneUserError(null));
+    dispatch(fetchOneUserSuccess({ data: res.data }));
+  } catch (err) {
+    dispatch(fetchOneUserError({ status: true, message: err }));
+    dispatch(fetchOneUserSuccess(null));
+  }
+
+  dispatch(fetchOneUserLoading(false));
 };

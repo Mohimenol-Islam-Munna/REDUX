@@ -40,11 +40,17 @@ const usersSlice = createSlice({
     },
 
     // fetch one
-    fetchOneUserLoading: (state) => {
-      state.fetchOneUserLoading = true;
+    fetchOneUserLoading: (state, { type, payload }) => {
+      state.fetchOneUserLoading = payload;
     },
-    fetchOneUserError: (state, action) => {},
-    fetchOneUserSuccess: (state, action) => {},
+
+    fetchOneUserError: (state, { type, payload }) => {
+      state.fetchOneUserError = payload;
+    },
+
+    fetchOneUserSuccess: (state, { type, payload }) => {
+      state.user = payload;
+    },
 
     createUserLoading: (state) => {
       state.createUserLoading = true;
@@ -67,7 +73,14 @@ const usersSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const { fetchAllUserLoading, fetchAllUserError, fetchAllUserSuccess } =
-  usersSlice.actions;
+export const {
+  fetchAllUserLoading,
+  fetchAllUserError,
+  fetchAllUserSuccess,
+
+  fetchOneUserError,
+  fetchOneUserSuccess,
+  fetchOneUserLoading,
+} = usersSlice.actions;
 
 export default usersSlice.reducer;
