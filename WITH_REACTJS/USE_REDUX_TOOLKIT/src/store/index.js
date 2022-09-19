@@ -1,15 +1,9 @@
-import { configureStore, compose } from "@reduxjs/toolkit";
-
-// import reducers
-import usersSlice from "./slices/usersSlice";
-
-const composeEnhencer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
   reducer: {
-    users: usersSlice,
+    // reducers name
   },
-  composeEnhencer,
 });
 
 export default store;

@@ -1,26 +1,10 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { useSelector, useDispatch } from "react-redux";
-import { incrementAge, incrementAgeByPayLoad } from "./store/slices/usersSlice";
-import getAllUsersHandler from "./store/actions/users";
 
 function App() {
-  const users = useSelector((store) => store.users);
-  const dispatch = useDispatch();
+  const incrementAgeHandler = () => {};
 
-  console.log("users ::", users);
-
-  const incrementAgeHandler = () => {
-    dispatch(incrementAge());
-  };
-
-  const incrementAgeByPayloadHandler = (value) => {
-    dispatch(incrementAgeByPayLoad(value));
-  };
-
-  useEffect(() => {
-    dispatch(getAllUsersHandler());
-  }, []);
+  const incrementAgeByPayloadHandler = (value) => {};
 
   return (
     <div className="App">
