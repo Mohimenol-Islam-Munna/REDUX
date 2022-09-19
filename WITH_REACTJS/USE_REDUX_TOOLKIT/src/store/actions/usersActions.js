@@ -5,14 +5,18 @@ import {
   fetchAllUserLoading,
   fetchAllUserError,
   fetchAllUserSuccess,
+  fetchOneUserLoading,
   fetchOneUserError,
   fetchOneUserSuccess,
-  fetchOneUserLoading,
   createUserLoading,
   createUserError,
   createUserSuccess,
+  updateUserLoading,
+  updateUserError,
+  updateUserSuccess,
 } from "../slices/usersSlice";
 
+// fetch all
 export const fetchAllUserActionHandler = () => async (dispatch) => {
   dispatch(fetchAllUserLoading(true));
 
@@ -28,6 +32,7 @@ export const fetchAllUserActionHandler = () => async (dispatch) => {
   dispatch(fetchAllUserLoading(false));
 };
 
+// fetch one
 export const fetchOneUserActionHandler = () => async (dispatch) => {
   dispatch(fetchOneUserLoading(true));
 
@@ -43,6 +48,7 @@ export const fetchOneUserActionHandler = () => async (dispatch) => {
   dispatch(fetchOneUserLoading(false));
 };
 
+// create
 export const createUserActionHandler = (data) => async (dispatch) => {
   dispatch(createUserLoading(true));
 
@@ -56,4 +62,20 @@ export const createUserActionHandler = (data) => async (dispatch) => {
   }
 
   dispatch(createUserLoading(false));
+};
+
+// update
+export const updateUserActionHandler = (data) => async (dispatch) => {
+  dispatch(updateUserLoading(true));
+
+  try {
+    let res = await axios.put(`${baseUrl}/api/users/7`, data);
+    dispatch(updateUserError(null));
+    dispatch(updateUserSuccess({ data: res.data, id: 7 }));
+  } catch (err) {
+    dispatch(updateUserError({ status: true, message: err }));
+    dispatch(updateUserSuccess(null));
+  }
+
+  dispatch(updateUserLoading(false));
 };

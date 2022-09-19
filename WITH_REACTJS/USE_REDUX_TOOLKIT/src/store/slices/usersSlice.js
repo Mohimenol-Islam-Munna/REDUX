@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "users",
@@ -69,13 +69,27 @@ const usersSlice = createSlice({
     },
 
     // update user
-    updateUserLoading: (state) => {
-      state.updateUserLoading = true;
+    updateUserLoading: (state, { type, payload }) => {
+      state.updateUserLoading = payload;
     },
 
-    updateUserError: (state, action) => {},
+    updateUserError: (state, { type, payload }) => {
+      state.updateUserError = payload;
+    },
 
-    updateUserSuccess: (state, action) => {},
+    updateUserSuccess: (state, { type, payload }) => {
+      // use current mathod to print state in reducer action otherwise its print Proxy
+      console.log("state ::", current(state));
+
+      const copyState = state.users.data.data;
+
+      let selectedIndex = copyState.findIndex((user) => user.id == payload.id);
+
+      if (selectedIndex !== -1) {
+        copyState[selectedIndex].email = "munna.cse.pust@gmail.com";
+        copyState[selectedIndex].first_name = payload.data.name;
+      }
+    },
 
     // delete user
     deleteUserLoading: (state) => {
@@ -101,6 +115,10 @@ export const {
   createUserLoading,
   createUserError,
   createUserSuccess,
+
+  updateUserLoading,
+  updateUserError,
+  updateUserSuccess,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;
