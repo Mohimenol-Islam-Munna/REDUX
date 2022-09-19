@@ -18,31 +18,51 @@ const initialState = {
   updateUserError: null,
   deleteUserError: null,
 
-  usersList: [],
-  user: {},
+  usersList: null,
+  user: null,
 };
 
 const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    fetchAllUserLoading: (state, action) => {},
-    fetchAllUserError: (state, action) => {},
-    fetchAllUserSuccess: (state, action) => {},
+    // fetch all
+    fetchAllUserLoading: (state, { type, payload }) => {
+      state.fetchAllUserLoading = payload.status;
+    },
 
-    fetchOneUserLoading: (state, action) => {},
+    fetchAllUserError: (state, { type, payload }) => {
+      state.fetchAllUserError = {
+        status: payload.status,
+        message: payload.message,
+      };
+    },
+
+    fetchAllUserSuccess: (state, { type, payload }) => {
+      state.usersList = payload.data;
+    },
+
+    fetchOneUserLoading: (state) => {
+      state.fetchOneUserLoading = true;
+    },
     fetchOneUserError: (state, action) => {},
     fetchOneUserSuccess: (state, action) => {},
 
-    createUserLoading: (state, action) => {},
+    createUserLoading: (state) => {
+      state.createUserLoading = true;
+    },
     createUserError: (state, action) => {},
     createUserSuccess: (state, action) => {},
 
-    updateUserLoading: (state, action) => {},
+    updateUserLoading: (state) => {
+      state.updateUserLoading = true;
+    },
     updateUserError: (state, action) => {},
     updateUserSuccess: (state, action) => {},
 
-    deleteUserLoading: (state, action) => {},
+    deleteUserLoading: (state) => {
+      state.deleteUserLoading = true;
+    },
     deleteUserError: (state, action) => {},
     deleteUserSuccess: (state, action) => {},
   },
