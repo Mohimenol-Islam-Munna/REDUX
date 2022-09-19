@@ -4,20 +4,23 @@ import "./App.css";
 import {
   fetchAllUserActionHandler,
   fetchOneUserActionHandler,
+  createUserActionHandler,
 } from "./store/actions/usersActions";
 
 function App() {
   const { users } = useSelector((store) => store);
   const dispatch = useDispatch();
 
-  console.log("users state ::", users.user);
+  console.log("users state ::", users.users);
 
   // fetch Single User Handler
   const fetchSingleUserHandler = () => {
     dispatch(fetchOneUserActionHandler());
   };
 
-  const incrementAgeByPayloadHandler = (value) => {};
+  const createUserHandler = (data) => {
+    dispatch(createUserActionHandler(data));
+  };
 
   useEffect(() => {
     dispatch(fetchAllUserActionHandler());
@@ -30,9 +33,18 @@ function App() {
         Fetch Single User
       </button>
 
-      <button onClick={(e) => incrementAgeByPayloadHandler(10)}>
-        Increment Age By Payload
-      </button>
+      <div style={{ marginTop: "20px" }}>
+        <button
+          onClick={() =>
+            createUserHandler({
+              name: "morpheus",
+              job: "leader",
+            })
+          }
+        >
+          Create User
+        </button>
+      </div>
     </div>
   );
 }

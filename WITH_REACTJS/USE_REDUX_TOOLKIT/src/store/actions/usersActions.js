@@ -8,6 +8,9 @@ import {
   fetchOneUserError,
   fetchOneUserSuccess,
   fetchOneUserLoading,
+  createUserLoading,
+  createUserError,
+  createUserSuccess,
 } from "../slices/usersSlice";
 
 export const fetchAllUserActionHandler = () => async (dispatch) => {
@@ -38,4 +41,19 @@ export const fetchOneUserActionHandler = () => async (dispatch) => {
   }
 
   dispatch(fetchOneUserLoading(false));
+};
+
+export const createUserActionHandler = (data) => async (dispatch) => {
+  dispatch(createUserLoading(true));
+
+  try {
+    let res = await axios.post(`${baseUrl}/api/users`, data);
+    dispatch(createUserError(null));
+    dispatch(createUserSuccess({ data: res.data }));
+  } catch (err) {
+    dispatch(createUserError({ status: true, message: err }));
+    dispatch(createUserSuccess(null));
+  }
+
+  dispatch(createUserLoading(false));
 };

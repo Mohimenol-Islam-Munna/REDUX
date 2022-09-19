@@ -52,22 +52,38 @@ const usersSlice = createSlice({
       state.user = payload;
     },
 
-    createUserLoading: (state) => {
-      state.createUserLoading = true;
+    // create
+    createUserLoading: (state, { type, payload }) => {
+      state.createUserLoading = payload;
     },
-    createUserError: (state, action) => {},
-    createUserSuccess: (state, action) => {},
 
+    createUserError: (state, { type, payload }) => {
+      state.createUserError = payload;
+    },
+
+    createUserSuccess: (state, { type, payload }) => {
+      console.log("create user success payload ::", payload);
+
+      // state.users.data.data.push(payload.data);
+      state.users.data.data = [...state.users.data.data, payload.data];
+    },
+
+    // update user
     updateUserLoading: (state) => {
       state.updateUserLoading = true;
     },
+
     updateUserError: (state, action) => {},
+
     updateUserSuccess: (state, action) => {},
 
+    // delete user
     deleteUserLoading: (state) => {
       state.deleteUserLoading = true;
     },
+
     deleteUserError: (state, action) => {},
+
     deleteUserSuccess: (state, action) => {},
   },
   extraReducers: (builder) => {},
@@ -81,6 +97,10 @@ export const {
   fetchOneUserError,
   fetchOneUserSuccess,
   fetchOneUserLoading,
+
+  createUserLoading,
+  createUserError,
+  createUserSuccess,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;
