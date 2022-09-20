@@ -33,10 +33,12 @@ const usersSlice = createSlice({
 
     fetchAllUserError: (state, { type, payload }) => {
       state.fetchAllUserError = payload;
+      state.users = null;
     },
 
     fetchAllUserSuccess: (state, { type, payload }) => {
       state.users = payload;
+      state.fetchAllUserError = null;
     },
 
     // fetch one
@@ -46,10 +48,12 @@ const usersSlice = createSlice({
 
     fetchOneUserError: (state, { type, payload }) => {
       state.fetchOneUserError = payload;
+      state.user = null;
     },
 
     fetchOneUserSuccess: (state, { type, payload }) => {
       state.user = payload;
+      state.fetchOneUserError = null;
     },
 
     // create
@@ -64,6 +68,7 @@ const usersSlice = createSlice({
     createUserSuccess: (state, { type, payload }) => {
       // state.users.data.data.push(payload.data);
       state.users.data.data = [...state.users.data.data, payload.data];
+      state.createUserError = null;
     },
 
     // update user
@@ -86,6 +91,7 @@ const usersSlice = createSlice({
         newState[selectedIndex].email = "munna33.cse.pust@gmail.com";
         newState[selectedIndex].first_name = payload.data.name;
         state.users.data.data = newState;
+        state.updateUserError = null;
       }
     },
 
@@ -104,6 +110,7 @@ const usersSlice = createSlice({
       );
 
       state.users.data.data = othersUser;
+      state.deleteUserError = null;
     },
   },
   extraReducers: (builder) => {},
