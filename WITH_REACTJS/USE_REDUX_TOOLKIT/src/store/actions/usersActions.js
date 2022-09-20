@@ -24,7 +24,7 @@ export const fetchAllUserActionHandler = () => async (dispatch) => {
   dispatch(fetchAllUserLoading(true));
 
   try {
-    let res = await axios.get(`${baseUrl}/api/users?page=2`);
+    const res = await axios.get(`${baseUrl}/api/users?page=2`);
     dispatch(fetchAllUserSuccess({ data: res.data }));
   } catch (err) {
     dispatch(fetchAllUserError({ status: true, message: err }));
@@ -34,11 +34,11 @@ export const fetchAllUserActionHandler = () => async (dispatch) => {
 };
 
 // fetch one
-export const fetchOneUserActionHandler = () => async (dispatch) => {
+export const fetchOneUserActionHandler = (userId) => async (dispatch) => {
   dispatch(fetchOneUserLoading(true));
 
   try {
-    let res = await axios.get(`${baseUrl}/api/users/2`);
+    const res = await axios.get(`${baseUrl}/api/users/${userId}`);
     dispatch(fetchOneUserSuccess({ data: res.data }));
   } catch (err) {
     dispatch(fetchOneUserError({ status: true, message: err }));
@@ -52,8 +52,8 @@ export const createUserActionHandler = (data) => async (dispatch) => {
   dispatch(createUserLoading(true));
 
   try {
-    let res = await axios.post(`${baseUrl}/api/users`, data);
-    dispatch(createUserSuccess({ data: res.data }));
+    const res = await axios.post(`${baseUrl}/api/users`, data);
+    dispatch(createUserSuccess({ data: res.data, inputData: data }));
   } catch (err) {
     dispatch(createUserError({ status: true, message: err }));
   }
@@ -67,7 +67,7 @@ export const updateUserActionHandler = (data) => async (dispatch) => {
 
   try {
     let res = await axios.put(`${baseUrl}/api/users/7`, data);
-    dispatch(updateUserSuccess({ data: res.data, id: 7 }));
+    dispatch(updateUserSuccess({ data: res.data, id: 7, inputData: data }));
   } catch (err) {
     dispatch(updateUserError({ status: true, message: err }));
   }

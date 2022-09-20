@@ -9,20 +9,36 @@ import {
   deleteUserActionHandler,
 } from "./store/actions/usersActions";
 
+import {
+  fetchAllStudentsActionHandler,
+  fetchSingleStudentActionHandler,
+  createStudentActionHandler,
+} from "./store/actions/studentsActions";
+
 function App() {
   const { users } = useSelector((store) => store);
   const dispatch = useDispatch();
 
-  console.log("users state ::", users.users);
+  // console.log("users state ::", users.users);
 
   // fetch Single User Handler
-  const fetchSingleUserHandler = () => {
-    dispatch(fetchOneUserActionHandler());
+  const fetchSingleUserHandler = (id) => {
+    dispatch(fetchOneUserActionHandler(id));
+  };
+
+  // fetch Single Student Handler
+  const fetchSingleStudentHandler = (id) => {
+    dispatch(fetchSingleStudentActionHandler(id));
   };
 
   // create user
   const createUserHandler = (data) => {
     dispatch(createUserActionHandler(data));
+  };
+
+  // create student
+  const createStudentHandler = (data) => {
+    dispatch(createStudentActionHandler(data));
   };
 
   // update user
@@ -35,46 +51,105 @@ function App() {
     dispatch(fetchAllUserActionHandler());
   }, []);
 
+  // fetch all student
+  useEffect(() => {
+    dispatch(fetchAllStudentsActionHandler());
+  }, []);
+
   return (
     <div className="App">
       <h2>REDUX TOOLKIT</h2>
 
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={() => fetchSingleUserHandler()}>
-          Fetch Single User
-        </button>
+      <div
+        style={{
+          width: "85%",
+          margin: "20px auto",
+          border: "1px solid salmon",
+        }}
+      >
+        <div style={{ marginTop: "20px" }}>
+          <button onClick={() => fetchSingleUserHandler(2)}>
+            Fetch Single User
+          </button>
+        </div>
+
+        <div style={{ marginTop: "20px" }}>
+          <button
+            onClick={() =>
+              createUserHandler({
+                name: "Md Mohimenol Islam",
+                job: "React Js Developer",
+              })
+            }
+          >
+            Create User
+          </button>
+        </div>
+
+        <div style={{ marginTop: "20px" }}>
+          <button
+            onClick={() =>
+              updateUserHandler({
+                name: "Md Mohimenol Islam Munna",
+                job: "Full Stack Javascript Developer",
+              })
+            }
+          >
+            Update User
+          </button>
+        </div>
+
+        <div style={{ margin: "20px 0px" }}>
+          <button onClick={() => dispatch(deleteUserActionHandler(8))}>
+            Delete User
+          </button>
+        </div>
       </div>
 
-      <div style={{ marginTop: "20px" }}>
-        <button
-          onClick={() =>
-            createUserHandler({
-              name: "Md Mohimenol Islam",
-              job: "React Js Developer",
-            })
-          }
-        >
-          Create User
-        </button>
-      </div>
+      <div
+        style={{
+          width: "85%",
+          margin: "20px auto",
+          border: "1px solid salmon",
+        }}
+      >
+        <div style={{ marginTop: "20px" }}>
+          <button onClick={() => fetchSingleStudentHandler(2)}>
+            Fetch Single Sudent
+          </button>
+        </div>
 
-      <div style={{ marginTop: "20px" }}>
-        <button
-          onClick={() =>
-            updateUserHandler({
-              name: "Md Mohimenol Islam Munna",
-              job: "Full Stack Javascript Developer",
-            })
-          }
-        >
-          Update User
-        </button>
-      </div>
+        <div style={{ marginTop: "20px" }}>
+          <button
+            onClick={() =>
+              createStudentHandler({
+                name: "Md Mohimenol Islam",
+                job: "Full Stack Js Developer",
+              })
+            }
+          >
+            Create Student
+          </button>
+        </div>
 
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={() => dispatch(deleteUserActionHandler(8))}>
-          Delete User
-        </button>
+        <div style={{ marginTop: "20px" }}>
+          <button
+            onClick={() =>
+              updateUserHandler({
+                name: "Md Mohimenol Islam Munna",
+                job: "Full Stack Javascript Developer",
+              })
+            }
+          >
+            Update Student
+          </button>
+        </div>
+
+        <div style={{ margin: "20px 0px" }}>
+          <button onClick={() => dispatch(deleteUserActionHandler(8))}>
+            Delete Student
+          </button>
+        </div>
       </div>
     </div>
   );
