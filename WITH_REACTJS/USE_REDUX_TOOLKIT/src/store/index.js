@@ -5,7 +5,7 @@ import studentsReducer from "./slices/studentsSlice";
 const store = configureStore({
   reducer: {
     users: usersReducer,
-    student: studentsReducer,
+    students: studentsReducer,
   },
 });
 

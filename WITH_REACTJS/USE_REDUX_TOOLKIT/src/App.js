@@ -14,6 +14,7 @@ import {
   fetchSingleStudentActionHandler,
   createStudentActionHandler,
   updateStudentActionHandler,
+  deleteStudentActionHandler,
 } from "./store/actions/studentsActions";
 
 function App() {
@@ -154,7 +155,7 @@ function App() {
         </div>
 
         <div style={{ margin: "20px 0px" }}>
-          <button onClick={() => dispatch(deleteUserActionHandler(8))}>
+          <button onClick={() => dispatch(deleteStudentActionHandler(8))}>
             Delete Student
           </button>
         </div>

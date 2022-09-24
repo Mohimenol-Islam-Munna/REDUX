@@ -35,3 +35,11 @@ export const updateStudentActionHandler = createAsyncThunk(
     return res.data;
   }
 );
+
+export const deleteStudentActionHandler = createAsyncThunk(
+  "students/deleteStudent",
+  async (id) => {
+    const res = await axios.delete(`${baseUrl}/api/users/${id}/`);
+    return res.data;
+  }
+);

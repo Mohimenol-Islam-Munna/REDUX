@@ -4,6 +4,7 @@ import {
   fetchSingleStudentActionHandler,
   createStudentActionHandler,
   updateStudentActionHandler,
+  deleteStudentActionHandler,
 } from "../actions/studentsActions";
 
 const initialState = {
@@ -132,6 +133,29 @@ const studentsSlice = createSlice({
 
         state.updateStudentError = null;
         state.updateStudentLoading = false;
+      }
+    );
+
+    builder.addCase(deleteStudentActionHandler.pending, (state) => {
+      state.deleteStudentLoading = true;
+    });
+
+    builder.addCase(
+      deleteStudentActionHandler.rejected,
+      (state, { type, error }) => {
+        state.deleteStudentLoading = false;
+        state.deleteStudentError = error;
+      }
+    );
+
+    builder.addCase(
+      deleteStudentActionHandler.fulfilled,
+      (state, { type, payload, meta }) => {
+        const othersStudents = state.students.filter(
+          (student) => student.id !== meta.arg
+        );
+
+        state.students = othersStudents;
       }
     );
   },
