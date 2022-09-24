@@ -1,12 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import applicationApiSlice from "./features/api/apiSlice";
+import { setupListeners } from "@reduxjs/toolkit/query";
+
+import applicationApi from "./service/applicationApi";
 
 const store = configureStore({
   reducer: {
-    [applicationApiSlice.reducerPath]: applicationApiSlice.reducer,
+    [applicationApi.reducerPath]: applicationApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(applicationApiSlice.middleware),
+  midddleware: (getDefaultMiddleware) => {
+    getDefaultMiddleware().concat(applicationApi.middleware);
+  },
 });
+
+setupListeners(store.dispatch);
 
 export default store;
