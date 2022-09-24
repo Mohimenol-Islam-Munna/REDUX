@@ -13,13 +13,15 @@ import {
   fetchAllStudentsActionHandler,
   fetchSingleStudentActionHandler,
   createStudentActionHandler,
+  updateStudentActionHandler,
 } from "./store/actions/studentsActions";
 
 function App() {
-  const { users } = useSelector((store) => store);
+  const { users, students } = useSelector((store) => store);
+
   const dispatch = useDispatch();
 
-  // console.log("users state ::", users.users);
+  console.log("students state ::", students);
 
   // fetch Single User Handler
   const fetchSingleUserHandler = (id) => {
@@ -44,6 +46,12 @@ function App() {
   // update user
   const updateUserHandler = (data) => {
     dispatch(updateUserActionHandler(data));
+  };
+
+  // update student
+  const updateStudentHandler = (id, data) => {
+    data.id = 7;
+    dispatch(updateStudentActionHandler(data));
   };
 
   // fetch all users
@@ -135,9 +143,9 @@ function App() {
         <div style={{ marginTop: "20px" }}>
           <button
             onClick={() =>
-              updateUserHandler({
-                name: "Md Mohimenol Islam Munna",
-                job: "Full Stack Javascript Developer",
+              updateStudentHandler(7, {
+                name: "Md Mohimenol Islam Munna 330",
+                job: "Full Stack Developer",
               })
             }
           >

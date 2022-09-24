@@ -15,8 +15,6 @@ export const fetchAllStudentsActionHandler = createAsyncThunk(
 export const fetchSingleStudentActionHandler = createAsyncThunk(
   "students/fetchSingleStudent",
   async (studentId) => {
-    console.log("studentId ::", studentId);
-
     const res = await axios.get(`${baseUrl}/api/users/${studentId}`);
     return res.data;
   }
@@ -26,6 +24,14 @@ export const createStudentActionHandler = createAsyncThunk(
   "students/createStudnet",
   async (data) => {
     const res = await axios.post(`${baseUrl}/api/users`, data);
+    return res.data;
+  }
+);
+
+export const updateStudentActionHandler = createAsyncThunk(
+  "students/updateStudent",
+  async (data) => {
+    const res = await axios.put(`${baseUrl}/api/users/${data.id}/`, data);
     return res.data;
   }
 );

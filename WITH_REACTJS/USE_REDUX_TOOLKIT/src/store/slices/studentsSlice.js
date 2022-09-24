@@ -3,6 +3,7 @@ import {
   fetchAllStudentsActionHandler,
   fetchSingleStudentActionHandler,
   createStudentActionHandler,
+  updateStudentActionHandler,
 } from "../actions/studentsActions";
 
 const initialState = {
@@ -97,10 +98,40 @@ const studentsSlice = createSlice({
     builder.addCase(
       createStudentActionHandler.fulfilled,
       (state, { type, payload, meta }) => {
-        // meta containe user inputed data . when need user inputed data then use form meta
+        // meta contains user inputed data. when need user inputed data then use from meta
         state.createStudentError = null;
         state.students = [...state.students, payload];
         state.createStudentLoading = false;
+      }
+    );
+
+    // update
+    builder.addCase(updateStudentActionHandler.pending, (state) => {
+      state.updateStudentLoading = true;
+    });
+
+    builder.addCase(
+      updateStudentActionHandler.rejected,
+      (state, { type, error }) => {
+        state.updateStudentError = error;
+        state.updateStudentLoading = false;
+      }
+    );
+
+    builder.addCase(
+      updateStudentActionHandler.fulfilled,
+      (state, { type, payload, meta }) => {
+        const selectedIndex = state.students.findIndex(
+          (student) => student.id === meta.arg.id
+        );
+
+        if (selectedIndex !== -1) {
+          state.students[selectedIndex].first_name = meta.arg.name;
+          state.students[selectedIndex].email = "mohimenolmunna@gmail.com";
+        }
+
+        state.updateStudentError = null;
+        state.updateStudentLoading = false;
       }
     );
   },
