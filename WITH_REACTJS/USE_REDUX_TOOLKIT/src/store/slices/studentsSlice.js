@@ -136,7 +136,7 @@ const studentsSlice = createSlice({
       }
     );
 
-    // delete 
+    // delete
     builder.addCase(deleteStudentActionHandler.pending, (state) => {
       state.deleteStudentLoading = true;
     });
@@ -157,6 +157,8 @@ const studentsSlice = createSlice({
         );
 
         state.students = othersStudents;
+        state.deleteStudentLoading = false;
+        state.deleteStudentError = null;
       }
     );
   },
