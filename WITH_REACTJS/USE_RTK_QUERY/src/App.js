@@ -1,33 +1,35 @@
 import "./App.css";
-import {
-  useGetUserQuery,
-  useCreateUserMutation,
-} from "../src/store/features/api/apiSlice";
+// import {
+//   useGetUserQuery,
+//   useCreateUserMutation,
+// } from "../src/store/features/api/apiSlice";
+
+import { useFetchAllUsersQuery } from "./store/service/applicationApi";
 
 const App = () => {
-  const [createUserMutationHandler, { isLoading }] = useCreateUserMutation();
-  const { isLoading: isUserLoading, data } = useGetUserQuery();
+  // const [createUserMutationHandler, { isLoading }] = useCreateUserMutation();
+  const { isLoading: isUserLoading, data } = useFetchAllUsersQuery();
 
-  console.log("user create isLoading ::", isLoading);
-  console.log("user data ::", data);
+  console.log("user isUserLoading ::", isUserLoading);
+  console.log("user data ::", data?.data);
 
   // create post handler
-  const createUserHandler = async (data) => {
-    console.log("createPostHandler", data);
+  // const createUserHandler = async (data) => {
+  //   console.log("createPostHandler", data);
 
-    try {
-      const res = await createUserMutationHandler(data).unwrap();
-      console.log("user created successfully :res:", res);
-    } catch (err) {
-      console.log("user does not created");
-    }
-  };
+  //   try {
+  //     const res = await createUserMutationHandler(data).unwrap();
+  //     console.log("user created successfully :res:", res);
+  //   } catch (err) {
+  //     console.log("user does not created");
+  //   }
+  // };
 
   return (
     <div className="App">
-      <h2>Awesome RTK Query</h2>
+      <h2 style={{ textTransform: "uppercase" }}>Awesome RTK Query</h2>
 
-      <div>
+      {/* <div>
         <button
           onClick={() =>
             createUserHandler({
@@ -38,7 +40,7 @@ const App = () => {
         >
           Create User
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
