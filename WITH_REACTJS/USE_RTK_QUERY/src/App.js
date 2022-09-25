@@ -2,7 +2,7 @@ import "./App.css";
 
 const App = () => {
   const createUserHandler = () => {
-    console.log("create user handler");
+    console.log("create user handler ");
   };
 
   return (
