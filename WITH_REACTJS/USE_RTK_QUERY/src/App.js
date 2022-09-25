@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SelectFromResult from "./components/SelectFromResult";
+
 import "./App.css";
 import {
   useGetAllUsersQuery,
@@ -9,6 +11,9 @@ const App = () => {
   const [fetchUser, setFetchUser] = useState(false);
 
   const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
+
+  // console.log("all user data  ::", data);
+
   const {
     isLoading: userLoading,
     isRefetching: userRefetching,
@@ -23,9 +28,6 @@ const App = () => {
       pollingInterval: 6000,
     }
   );
-
-  console.log("userLoading ::", userLoading);
-  console.log("userData ::", userData);
 
   const createUserHandler = () => {
     console.log("create user handler");
@@ -74,6 +76,18 @@ const App = () => {
         >
           Create User
         </button>
+      </div>
+
+      <div
+        style={{
+          width: "80%",
+          margin: "1.5rem auto",
+          backgroundColor: "lightgray",
+          padding: "0.5rem",
+          border: "0.1rem solid palegreen",
+        }}
+      >
+        <SelectFromResult id={3} />
       </div>
     </div>
   );
