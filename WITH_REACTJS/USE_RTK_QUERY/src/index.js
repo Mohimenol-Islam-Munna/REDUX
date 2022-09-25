@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 
-import applicationApi from "./RTKQueryService.js/api/applicationApi";
+import applicationApi from "./RTKQueryServices.js/api/applicationApi";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

@@ -11,4 +11,5 @@ const applicationApi = createApi({
   }),
 });
 
+export const { useGetAllUsersQuery } = applicationApi;
 export default applicationApi;
