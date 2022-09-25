@@ -1,11 +1,20 @@
 import "./App.css";
-import { useGetAllUsersQuery } from "./RTKQueryServices/api/applicationApi";
+import {
+  useGetAllUsersQuery,
+  useGetUserQuery,
+} from "./RTKQueryServices/api/applicationApi";
 
 const App = () => {
   const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
+  const {
+    isLoading: userLoading,
+    isRefetching: userRefetching,
+    error: userError,
+    data: userData,
+  } = useGetUserQuery({ name: "get single user ", id: 8 });
 
-  console.log("isLoading ::", isLoading);
-  console.log("data ::", data);
+  console.log("userLoading ::", userLoading);
+  console.log("userData ::", userData);
 
   const createUserHandler = () => {
     console.log("create user handler");
@@ -23,7 +32,7 @@ const App = () => {
           margin: "2rem auto",
         }}
       >
-        {/* {data.map((user) => (
+        {data?.data.map((user) => (
           <div
             key={user.id}
             style={{
@@ -36,7 +45,7 @@ const App = () => {
             <h2>Name : {`${user.first_name} ${user.last_name}`}</h2>
             <p>Email : {user.email}</p>
           </div>
-        ))} */}
+        ))}
       </div>
 
       <div>
