@@ -29,17 +29,17 @@ const applicationApi = createApi({
       query: ({ id }) => `/api/user/${id}`,
 
       transformResponse: (response, meta, arg) => {
-        console.log("response 2:", response);
-        console.log("meta 2:", meta);
-        console.log("arg 2:", arg);
+        // console.log("response 2:", response);
+        // console.log("meta 2:", meta);
+        // console.log("arg 2:", arg);
 
-        return response;
+        return response.data;
       },
 
       providesTags: (result, error, arg) => {
-        console.log("result 2:", result);
-        console.log("error 2:", error);
-        console.log("id 2:", arg);
+        // console.log("result 2:", result);
+        // console.log("error 2:", error);
+        // console.log("id 2:", arg);
 
         return [{ type: "USERS", id: arg.id }];
       },

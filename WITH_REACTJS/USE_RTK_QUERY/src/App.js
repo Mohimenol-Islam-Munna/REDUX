@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import {
   useGetAllUsersQuery,
@@ -5,13 +6,20 @@ import {
 } from "./RTKQueryServices/api/applicationApi";
 
 const App = () => {
+  const [fetchUser, setFetchUser] = useState(false);
+
   const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
   const {
     isLoading: userLoading,
     isRefetching: userRefetching,
     error: userError,
     data: userData,
-  } = useGetUserQuery({ name: "get single user ", id: 8 });
+  } = useGetUserQuery(
+    { name: "get single user ", id: 8 },
+    {
+      skip: !fetchUser,
+    }
+  );
 
   console.log("userLoading ::", userLoading);
   console.log("userData ::", userData);
@@ -46,6 +54,10 @@ const App = () => {
             <p>Email : {user.email}</p>
           </div>
         ))}
+      </div>
+
+      <div>
+        <button onClick={() => setFetchUser(true)}>Fetch User</button>
       </div>
 
       <div>
