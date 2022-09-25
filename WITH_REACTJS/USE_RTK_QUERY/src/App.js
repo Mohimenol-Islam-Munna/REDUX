@@ -18,6 +18,9 @@ const App = () => {
     { name: "get single user ", id: 8 },
     {
       skip: !fetchUser,
+
+      // provide value in milliseconds. After specified time it will automatically refetch data
+      pollingInterval: 6000,
     }
   );
 
