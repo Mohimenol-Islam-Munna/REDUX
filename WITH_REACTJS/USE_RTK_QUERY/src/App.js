@@ -5,9 +5,7 @@ const App = () => {
   const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
 
   console.log("isLoading ::", isLoading);
-  console.log("isRefetching ::", isRefetching);
-  console.log("error ::", error);
-  console.log("data ::", data?.data);
+  console.log("data ::", data);
 
   const createUserHandler = () => {
     console.log("create user handler");
@@ -25,7 +23,7 @@ const App = () => {
           margin: "2rem auto",
         }}
       >
-        {data?.data.map((user) => (
+        {/* {data.map((user) => (
           <div
             key={user.id}
             style={{
@@ -38,7 +36,7 @@ const App = () => {
             <h2>Name : {`${user.first_name} ${user.last_name}`}</h2>
             <p>Email : {user.email}</p>
           </div>
-        ))}
+        ))} */}
       </div>
 
       <div>

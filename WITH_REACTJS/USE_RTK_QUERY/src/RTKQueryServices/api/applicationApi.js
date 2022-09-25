@@ -7,6 +7,13 @@ const applicationApi = createApi({
   endpoints: (builder) => ({
     getAllUsers: builder.query({
       query: () => "/api/users",
+      transformResponse: (response, meta, arg) => {
+        console.log("response :", response);
+        console.log("meta :", meta);
+        console.log("arg :", arg);
+
+        return response.data;
+      },
     }),
   }),
 });
