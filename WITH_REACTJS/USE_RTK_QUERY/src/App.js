@@ -1,5 +1,5 @@
 import "./App.css";
-import { useGetAllUsersQuery } from "./RTKQueryServices.js/api/applicationApi";
+import { useGetAllUsersQuery } from "./RTKQueryServices/api/applicationApi";
 
 const App = () => {
   const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
