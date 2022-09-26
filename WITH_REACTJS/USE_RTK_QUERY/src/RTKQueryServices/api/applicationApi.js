@@ -4,11 +4,11 @@ import { baseUrl } from "../../utils/baseUrl";
 const applicationApi = createApi({
   reducerPath: "applicationReducerPath",
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-  tagTypes: ["USERS"],
+  tagTypes: ["Users"],
   endpoints: (builder) => ({
+    // get all user
     getAllUsers: builder.query({
       query: () => "/api/users",
-
       transformResponse: (response, meta, arg) => {
         // console.log("response :", response);
         // console.log("meta :", meta);
@@ -16,15 +16,15 @@ const applicationApi = createApi({
 
         return response;
       },
-
       providesTags: (result, error) => {
         // console.log("result :", result);
         // console.log("error :", error);
 
-        return [{ type: "USERS" }];
+        return [{ type: "Users" }];
       },
     }),
 
+    // get single user
     getUser: builder.query({
       query: ({ id }) => `/api/user/${id}`,
 
@@ -41,11 +41,47 @@ const applicationApi = createApi({
         // console.log("error 2:", error);
         // console.log("id 2:", arg);
 
-        return [{ type: "USERS", id: arg.id }];
+        return [{ type: "Users", id: arg.id }];
       },
+    }),
+
+    // create user
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: `${baseUrl}/api/users/`,
+        method: "POST",
+        body: data,
+      }),
+
+      transformResponse: (response, meta, arg) => {
+        console.log("arg ::", arg);
+        console.log("response ::", response);
+
+        return response;
+      },
+      invalidatesTags: ["Users"],
+
+      async onQueryStarted(
+        arg,
+        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      ) {},
+
+      async onCacheEntryAdded(
+        arg,
+        {
+          dispatch,
+          getState,
+          extra,
+          requestId,
+          cacheEntryRemoved,
+          cacheDataLoaded,
+          getCacheEntry,
+        }
+      ) {},
     }),
   }),
 });
 
-export const { useGetAllUsersQuery, useGetUserQuery } = applicationApi;
+export const { useGetAllUsersQuery, useGetUserQuery, useCreateUserMutation } =
+  applicationApi;
 export default applicationApi;

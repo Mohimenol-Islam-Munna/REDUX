@@ -5,12 +5,37 @@ import "./App.css";
 import {
   useGetAllUsersQuery,
   useGetUserQuery,
+  useCreateUserMutation,
 } from "./RTKQueryServices/api/applicationApi";
 
 const App = () => {
   const [fetchUser, setFetchUser] = useState(false);
+  const [
+    createUser,
+    {
+      isLoading: createUserLoading,
+      error: createUserError,
+      data: createUserData,
+    },
+  ] = useCreateUserMutation();
 
-  const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
+  console.log("createUserData ::", createUserData);
+
+  const { isLoading, isRefetching, error, data, refetch } = useGetAllUsersQuery(
+    undefined,
+    {
+      skip: false,
+      refetchOnMountOrArgChange: false,
+      refetchOnFocus: false,
+      refetchOnReconnect: true,
+    }
+  );
+
+  // refetch all user handler
+  const refetchAllUser = () => {
+    console.log("refetch all user handler ::");
+    refetch();
+  };
 
   const {
     isLoading: userLoading,
@@ -25,10 +50,9 @@ const App = () => {
     }
   );
 
-  console.log("userData  ::", userData);
-
-  const createUserHandler = () => {
-    console.log("create user handler");
+  const createUserHandler = (data) => {
+    console.log("create user handler :", data);
+    createUser(data);
   };
 
   return (
@@ -57,6 +81,10 @@ const App = () => {
             <p>Email : {user.email}</p>
           </div>
         ))}
+      </div>
+
+      <div style={{ marginTop: "0.8rem" }}>
+        <button onClick={() => refetchAllUser()}>reFetch All User</button>
       </div>
 
       <div style={{ marginTop: "0.8rem" }}>
