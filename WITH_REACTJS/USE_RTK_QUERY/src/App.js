@@ -12,8 +12,6 @@ const App = () => {
 
   const { isLoading, isRefetching, error, data } = useGetAllUsersQuery();
 
-  // console.log("all user data  ::", data);
-
   const {
     isLoading: userLoading,
     isRefetching: userRefetching,
@@ -23,11 +21,11 @@ const App = () => {
     { name: "get single user ", id: 8 },
     {
       skip: !fetchUser,
-
-      // provide value in milliseconds. After specified time it will automatically refetch data
       pollingInterval: 6000,
     }
   );
+
+  console.log("userData  ::", userData);
 
   const createUserHandler = () => {
     console.log("create user handler");
@@ -61,11 +59,26 @@ const App = () => {
         ))}
       </div>
 
-      <div>
-        <button onClick={() => setFetchUser(true)}>Fetch User</button>
+      <div style={{ marginTop: "0.8rem" }}>
+        <button onClick={() => setFetchUser(true)}>Fetch Single User</button>
       </div>
 
-      <div>
+      {userData && (
+        <div
+          style={{
+            width: "80%",
+            backgroundColor: "lightgray",
+            padding: "0.5rem",
+            border: "0.1rem solid palegreen",
+            margin: "1rem auto",
+          }}
+        >
+          <h2>Name : {`${userData.name}`}</h2>
+          <p>Color : {userData.color}</p>
+        </div>
+      )}
+
+      <div style={{ marginTop: "0.8rem" }}>
         <button
           onClick={() =>
             createUserHandler({

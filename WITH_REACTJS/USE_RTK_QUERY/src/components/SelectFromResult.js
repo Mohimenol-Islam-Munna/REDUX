@@ -11,8 +11,6 @@ const SelectFromResult = ({ id }) => {
     },
   });
 
-  console.log("select from result :user:", user);
-
   return (
     <div>
       <h2>Select From Result</h2>
