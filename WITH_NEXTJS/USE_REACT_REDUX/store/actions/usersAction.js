@@ -3,11 +3,10 @@ import axios from "axios";
 
 export const fetchAllUsers = () => async (dispatch) => {
   try {
-    const res = await axios("https://jsonplaceholder.typicode.com/users");
+    const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+    console.log("@@@@ res data :by getStaticProps:", res.data);
 
-    console.log("res data ::", res);
-
-    dispatch({ type: GET_USERS, payload: res });
+    return dispatch({ type: GET_USERS, payload: res.data });
   } catch (err) {
     console.log("users data fetching error ::", err);
   }

@@ -1,7 +1,27 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import rootReducer from "./reducer/rootReducer";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const composeEnhancers =
+  (typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 
-export default store;
+const reducer = (state, action) => {
+  if (action.type === HYDRATE) {
+    const newState = {
+      ...state,
+      ...action.payload,
+    };
+
+    return newState;
+  } else {
+    return rootReducer(state, action);
+  }
+};
+
+const store = () => createStore(reducer, applyMiddleware(thunk));
+
+const storeWrapper = createWrapper(store);
+
+export default storeWrapper;
