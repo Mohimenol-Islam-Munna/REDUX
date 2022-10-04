@@ -25,7 +25,7 @@ export const fetchEngineerAction = createAsyncThunk(
   `engineer/fetchEngineer`,
   async (id) => {
     const res = await axios.get(`${baseUrl}/api/users/${id}`);
-    return res;
+    return res.data;
   }
 );
 

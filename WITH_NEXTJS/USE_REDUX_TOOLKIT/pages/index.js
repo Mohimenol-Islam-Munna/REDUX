@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import storeWrapper from "../mainStore/index";
@@ -10,20 +11,13 @@ import {
   deleteEngineerAction,
 } from "../mainStore/actions/engineerActions";
 
-export const getStaticProps = storeWrapper.getStaticProps(
-  (store) =>
-    async ({ req, res }) => {
-      await store.dispatch(fetchAllEngineerAction());
-    }
-);
-
 const Home = () => {
   const { fetchAllEngineerLoading, fetchAllEngineerError, engineerList } =
     useSelector((store) => store.engineer);
 
-  console.log("fetchAllEngineerLoading ::", fetchAllEngineerLoading);
-  console.log("fetchAllEngineerError ::", fetchAllEngineerError);
-  console.log("engineerList ::", engineerList);
+  // console.log("fetchAllEngineerLoading ::", fetchAllEngineerLoading);
+  // console.log("fetchAllEngineerError ::", fetchAllEngineerError);
+  // console.log("engineerList ::", engineerList);
 
   if (fetchAllEngineerLoading) {
     return (
@@ -39,13 +33,14 @@ const Home = () => {
       <div style={{ width: "80%", margin: "1.5rem auto" }}>
         {engineerList?.map((engineer) => (
           <div
+            key={engineer.id}
             style={{
               width: "100%",
               margin: "0.5rem 0",
               backgroundColor: "lightgray",
               padding: "1rem",
               borderRadius: "0.3rem",
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             <img
@@ -55,11 +50,25 @@ const Home = () => {
             />
             <h2>Name: {`${engineer.first_name} ${engineer.last_name}`}</h2>
             <h4>Email: {engineer.email} </h4>
+            <Link href={`details/${engineer.id}`} passHref>
+              <button>View Details</button>
+            </Link>
           </div>
         ))}
       </div>
     </div>
   );
 };
+
+export const getStaticProps = storeWrapper.getStaticProps(
+  (store) =>
+    async ({ req, res }) => {
+      await store.dispatch(fetchAllEngineerAction());
+
+      return {
+        props: {},
+      };
+    }
+);
 
 export default Home;

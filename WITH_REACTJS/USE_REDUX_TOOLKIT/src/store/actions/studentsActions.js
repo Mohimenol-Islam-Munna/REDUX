@@ -20,6 +20,7 @@ export const fetchSingleStudentActionHandler = createAsyncThunk(
   }
 );
 
+// create student
 export const createStudentActionHandler = createAsyncThunk(
   "students/createStudnet",
   async (data) => {
@@ -28,6 +29,7 @@ export const createStudentActionHandler = createAsyncThunk(
   }
 );
 
+// update student
 export const updateStudentActionHandler = createAsyncThunk(
   "students/updateStudent",
   async (data) => {
@@ -36,6 +38,7 @@ export const updateStudentActionHandler = createAsyncThunk(
   }
 );
 
+// delete student
 export const deleteStudentActionHandler = createAsyncThunk(
   "students/deleteStudent",
   async (id) => {
