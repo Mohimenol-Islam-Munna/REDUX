@@ -1,41 +1,30 @@
 import React, { useEffect } from "react";
 import styles from "../styles/Home.module.css";
-
 import { useSelector, useDispatch } from "react-redux";
-import storeWrapper from "../store";
-import { userActionHandler } from "../store/actions/userAction";
-import { fetchAllUser } from "../store/slices/userSlice";
-import { readTasks } from "../store/slices/tasksSlice";
-
-// export const getStaticProps = storeWrapper.getStaticProps(
-//   (store) => async (context) => {
-//     // store.dispatch(userActionHandler());
-//     await store.dispatch(fetchAllUser("data go"));
-
-//     return {
-//       props: {
-//         data: "user",
-//       },
-//     };
-//   }
-// );
+import storeWrapper from "../mainStore/index";
+import {
+  createEngineerAction,
+  fetchAllEngineerAction,
+  fetchEngineerAction,
+  updateEngineerAction,
+  deleteEngineerAction,
+} from "../mainStore/actions/engineerActions";
 
 export const getStaticProps = storeWrapper.getStaticProps(
   (store) =>
     async ({ req, res }) => {
-      await store.dispatch(readTasks({ req, res }));
+      await store.dispatch(fetchAllEngineerAction());
     }
 );
 
-const Home = ({ data }) => {
-  const store = useSelector((store) => store.tasks);
+const Home = () => {
+  const store = useSelector((store) => store);
   const dispatch = useDispatch();
 
   console.log("application store ::", store);
 
   // useEffect(() => {
-  //   // dispatch(fetchAllUser("client side dispatch"));
-  //   dispatch(userActionHandler());
+  //   dispatch(fetchAllEngineerAction());
   // }, []);
 
   return (

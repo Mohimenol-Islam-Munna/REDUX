@@ -1,11 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
-import engineerReducer from "../slices/engineerSlice";
 
 // create user
 export const createEngineerAction = createAsyncThunk(
-  `${engineerReducer.name}/createEngineer`,
+  `engineer/createEngineer`,
   async (data) => {
     const res = await axios.post(`${baseUrl}/api/users?page=2`, data);
     return res;
@@ -14,16 +13,16 @@ export const createEngineerAction = createAsyncThunk(
 
 // fetch all engineer
 export const fetchAllEngineerAction = createAsyncThunk(
-  `${engineerReducer.name}/fetchAllEngineer`,
+  `engineer/fetchAllEngineer`,
   async () => {
     const res = await axios.get(`${baseUrl}/api/users?page=2`);
-    return res;
+    return res.data;
   }
 );
 
 // fetch engineer
 export const fetchEngineerAction = createAsyncThunk(
-  `${engineerReducer.name}/fetchEngineer`,
+  `engineer/fetchEngineer`,
   async (id) => {
     const res = await axios.get(`${baseUrl}/api/users/${id}`);
     return res;
@@ -32,7 +31,7 @@ export const fetchEngineerAction = createAsyncThunk(
 
 // update engineer
 export const updateEngineerAction = createAsyncThunk(
-  `${engineerReducer.name}/updateEngineer`,
+  `engineer/updateEngineer`,
   async (data, id) => {
     const res = await axios.put(`${baseUrl}/api/users/${id}`, data);
     return res;
@@ -41,7 +40,7 @@ export const updateEngineerAction = createAsyncThunk(
 
 // delete engineer
 export const deleteEngineerAction = createAsyncThunk(
-  `${engineerReducer.name}/deleteEngineer`,
+  `engineer/deleteEngineer`,
   async (id) => {
     const res = await axios.delete(`${baseUrl}/api/users/${id}`);
     return res;

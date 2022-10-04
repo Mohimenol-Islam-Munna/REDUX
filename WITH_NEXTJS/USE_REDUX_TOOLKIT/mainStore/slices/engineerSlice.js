@@ -1,5 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import {
+  createEngineerAction,
+  fetchAllEngineerAction,
+  fetchEngineerAction,
+  updateEngineerAction,
+  deleteEngineerAction,
+} from "../actions/engineerActions";
 
 const initialState = {
   createEngineerLoading: false,
@@ -29,7 +36,7 @@ const userSlice = createSlice({
     builder.addCase(HYDRATE, (state, action) => {
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.engineer,
       };
     });
 
@@ -73,7 +80,7 @@ const userSlice = createSlice({
     builder.addCase(
       fetchAllEngineerAction.fulfilled,
       (state, { type, payload }) => {
-        console.log("fetch all Engineer fulfilled");
+        state.engineerList = payload.data;
       }
     );
 
