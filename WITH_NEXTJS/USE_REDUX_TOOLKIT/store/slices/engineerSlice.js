@@ -59,7 +59,7 @@ const userSlice = createSlice({
       (state, { type, payload, meta }) => {
         state.createEngineerError = null;
         state.createEngineerLoading = false;
-        // meta.arg.router.push("/");
+        meta.arg.router.push("/");
       }
     );
 

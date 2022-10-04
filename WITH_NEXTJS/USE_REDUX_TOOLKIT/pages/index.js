@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import storeWrapper from "../mainStore/index";
+import storeWrapper from "../store/index";
 import {
   fetchAllEngineerAction,
   deleteEngineerAction,
-} from "../mainStore/actions/engineerActions";
+} from "../store/actions/engineerActions";
 
 const Home = () => {
   const { fetchAllEngineerLoading, fetchAllEngineerError, engineerList } =

@@ -1,16 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import storeWrapper from "../../mainStore";
+import storeWrapper from "../../store/index";
 
-import { fetchEngineerAction } from "../../mainStore/actions/engineerActions";
+import { fetchEngineerAction } from "../../store/actions/engineerActions";
 
 const EngineerDetails = ({ data }) => {
   const { fetchEngineerLoading, fetchEngineerError, engineerData } =
     useSelector((store) => store.engineer);
 
-//   console.log("fetchEngineerLoading ::", fetchEngineerLoading);
-//   console.log("fetchEngineerError ::", fetchEngineerError);
-//   console.log("engineerData ::", engineerData);
+  //   console.log("fetchEngineerLoading ::", fetchEngineerLoading);
+  //   console.log("fetchEngineerError ::", fetchEngineerError);
+  //   console.log("engineerData ::", engineerData);
 
   if (fetchEngineerLoading) {
     return (

@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import userReducer from "./slices/userSlice";
-import taksReducer from "./slices/tasksSlice";
+import engineerReducer from "./slices/engineerSlice";
 
 const store = () =>
   configureStore({
     reducer: {
-      user: userReducer.reducer,
-      tasks: taksReducer,
+      [engineerReducer.name]: engineerReducer.reducer,
     },
     devTools: true,
   });

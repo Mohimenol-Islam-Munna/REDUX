@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { updateEngineerAction } from "../../mainStore/actions/engineerActions";
+import { updateEngineerAction } from "../../store/actions/engineerActions";
 
 const UpdateEngineer = () => {
   const router = useRouter();
