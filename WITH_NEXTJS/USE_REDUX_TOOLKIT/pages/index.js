@@ -30,6 +30,26 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <h2 style={{ textAlign: "center" }}>NEXT JS WITH REDUX TOOLKIT</h2>
+      <div
+        style={{
+          width: "80%",
+          margin: "0.5rem auto",
+          backgroundColor: "lightgray",
+          padding: "1rem",
+          borderRadius: "0.3rem",
+          textAlign: "center",
+        }}
+      >
+        <Link href="create" passHref>
+          <button style={{ marginRight: "0.5rem", padding: "5px" }}>
+            Go To Create Page
+          </button>
+        </Link>
+
+        <button style={{ marginRight: "0.5rem", padding: "5px" }}>
+          Delete Engineer
+        </button>
+      </div>
       <div style={{ width: "80%", margin: "1.5rem auto" }}>
         {engineerList?.map((engineer) => (
           <div
@@ -51,7 +71,14 @@ const Home = () => {
             <h2>Name: {`${engineer.first_name} ${engineer.last_name}`}</h2>
             <h4>Email: {engineer.email} </h4>
             <Link href={`details/${engineer.id}`} passHref>
-              <button>View Details</button>
+              <button style={{ marginRight: "0.5rem", padding: "5px" }}>
+                View Details
+              </button>
+            </Link>
+            <Link href={`update/${engineer.id}`} passHref>
+              <button style={{ marginRight: "0.5rem", padding: "5px" }}>
+                Go To Update Page
+              </button>
             </Link>
           </div>
         ))}

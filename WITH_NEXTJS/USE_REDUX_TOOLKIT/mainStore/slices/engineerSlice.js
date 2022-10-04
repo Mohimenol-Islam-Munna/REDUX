@@ -33,6 +33,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // HYDRATE
     builder.addCase(HYDRATE, (state, action) => {
       return {
         ...state,
@@ -41,24 +42,24 @@ const userSlice = createSlice({
     });
 
     // create
-    builder.addCase(
-      createEngineerAction.pending,
-      (state, { type, payload }) => {
-        console.log("create Engineer pending");
-      }
-    );
+    builder.addCase(createEngineerAction.pending, (state) => {
+      state.createEngineerLoading = true;
+    });
 
     builder.addCase(
       createEngineerAction.rejected,
-      (state, { type, payload }) => {
-        console.log("create Engineer rejected");
+      (state, { type, payload, error }) => {
+        state.createEngineerError = error;
+        state.createEngineerLoading = false;
       }
     );
 
     builder.addCase(
       createEngineerAction.fulfilled,
-      (state, { type, payload }) => {
-        console.log("create Engineer fulfilled");
+      (state, { type, payload, meta }) => {
+        state.createEngineerError = null;
+        state.createEngineerLoading = false;
+        // meta.arg.router.push("/");
       }
     );
 
@@ -69,8 +70,8 @@ const userSlice = createSlice({
 
     builder.addCase(
       fetchAllEngineerAction.rejected,
-      (state, { type, payload }) => {
-        state.fetchAllEngineerError = payload;
+      (state, { type, payload, error }) => {
+        state.fetchAllEngineerError = error;
         state.engineerList = null;
         state.fetchAllEngineerLoading = false;
       }
@@ -87,15 +88,13 @@ const userSlice = createSlice({
 
     // fetch single
     builder.addCase(fetchEngineerAction.pending, (state, { type, payload }) => {
-      console.log("@@@@@ fetch Engineer pending 3");
       state.fetchEngineerLoading = true;
     });
 
     builder.addCase(
       fetchEngineerAction.rejected,
-      (state, { type, payload }) => {
-        console.log("fetch Engineer rejected");
-        state.fetchEngineerError = payload;
+      (state, { type, payload, error }) => {
+        state.fetchEngineerError = error;
         state.engineerData = null;
         state.fetchEngineerLoading = false;
       }
@@ -104,7 +103,6 @@ const userSlice = createSlice({
     builder.addCase(
       fetchEngineerAction.fulfilled,
       (state, { type, payload }) => {
-        console.log("@@@@@ fetch Engineer fulfilled 3::", payload);
         state.fetchEngineerError = null;
         state.engineerData = payload.data;
         state.fetchEngineerLoading = false;
@@ -112,24 +110,24 @@ const userSlice = createSlice({
     );
 
     // update
-    builder.addCase(
-      updateEngineerAction.pending,
-      (state, { type, payload }) => {
-        console.log("update Engineer pending");
-      }
-    );
+    builder.addCase(updateEngineerAction.pending, (state) => {
+      state.updateEngineerLoading = true;
+    });
 
     builder.addCase(
       updateEngineerAction.rejected,
-      (state, { type, payload }) => {
-        console.log("update Engineer rejected");
+      (state, { type, payload, error }) => {
+        state.updateEngineerError = error;
+        state.updateEngineerLoading = false;
       }
     );
 
     builder.addCase(
       updateEngineerAction.fulfilled,
-      (state, { type, payload }) => {
-        console.log("update Engineer fulfilled");
+      (state, { type, payload, meta }) => {
+        state.updateEngineerError = null;
+        state.updateEngineerLoading = false;
+        meta.arg.router.push("/");
       }
     );
 

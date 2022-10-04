@@ -6,8 +6,8 @@ import { baseUrl } from "../../utils/baseUrl";
 export const createEngineerAction = createAsyncThunk(
   `engineer/createEngineer`,
   async (data) => {
-    const res = await axios.post(`${baseUrl}/api/users?page=2`, data);
-    return res;
+    const res = await axios.post(`${baseUrl}/api/users/`, data.data);
+    return res.data;
   }
 );
 
@@ -32,9 +32,12 @@ export const fetchEngineerAction = createAsyncThunk(
 // update engineer
 export const updateEngineerAction = createAsyncThunk(
   `engineer/updateEngineer`,
-  async (data, id) => {
-    const res = await axios.put(`${baseUrl}/api/users/${id}`, data);
-    return res;
+  async (data) => {
+    const res = await axios.put(
+      `${baseUrl}/api/users/${data.engineerId}`,
+      data.data
+    );
+    return res.data;
   }
 );
 
