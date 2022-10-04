@@ -46,6 +46,6 @@ export const deleteEngineerAction = createAsyncThunk(
   `engineer/deleteEngineer`,
   async (id) => {
     const res = await axios.delete(`${baseUrl}/api/users/${id}`);
-    return res;
+    return res.data;
   }
 );

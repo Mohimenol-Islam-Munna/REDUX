@@ -4,10 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import storeWrapper from "../mainStore/index";
 import {
-  createEngineerAction,
   fetchAllEngineerAction,
-  fetchEngineerAction,
-  updateEngineerAction,
   deleteEngineerAction,
 } from "../mainStore/actions/engineerActions";
 
@@ -15,9 +12,16 @@ const Home = () => {
   const { fetchAllEngineerLoading, fetchAllEngineerError, engineerList } =
     useSelector((store) => store.engineer);
 
+  const dispatch = useDispatch();
+
   // console.log("fetchAllEngineerLoading ::", fetchAllEngineerLoading);
   // console.log("fetchAllEngineerError ::", fetchAllEngineerError);
-  // console.log("engineerList ::", engineerList);
+  console.log("engineerList ::", engineerList);
+
+  // delete engineer handler 
+  const deleteEngineerHandler = (id) => {
+    dispatch(deleteEngineerAction(id));
+  };
 
   if (fetchAllEngineerLoading) {
     return (
@@ -45,10 +49,6 @@ const Home = () => {
             Go To Create Page
           </button>
         </Link>
-
-        <button style={{ marginRight: "0.5rem", padding: "5px" }}>
-          Delete Engineer
-        </button>
       </div>
       <div style={{ width: "80%", margin: "1.5rem auto" }}>
         {engineerList?.map((engineer) => (
@@ -80,6 +80,12 @@ const Home = () => {
                 Go To Update Page
               </button>
             </Link>
+            <button
+              style={{ marginRight: "0.5rem", padding: "5px" }}
+              onClick={() => deleteEngineerHandler(engineer.id)}
+            >
+              Delete Engineer
+            </button>
           </div>
         ))}
       </div>

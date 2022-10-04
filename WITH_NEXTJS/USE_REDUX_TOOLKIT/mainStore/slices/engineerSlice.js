@@ -132,24 +132,27 @@ const userSlice = createSlice({
     );
 
     // delete
-    builder.addCase(
-      deleteEngineerAction.pending,
-      (state, { type, payload }) => {
-        console.log("delete Engineer pending");
-      }
-    );
+    builder.addCase(deleteEngineerAction.pending, (state) => {
+      state.deleteEngineerLoading = true;
+    });
 
     builder.addCase(
       deleteEngineerAction.rejected,
-      (state, { type, payload }) => {
-        console.log("delete Engineer rejected");
+      (state, { type, payload, error }) => {
+        state.deleteEngineerError = error;
+        state.deleteEngineerLoading = false;
       }
     );
 
     builder.addCase(
       deleteEngineerAction.fulfilled,
-      (state, { type, payload }) => {
-        console.log("delete Engineer fulfilled");
+      (state, { type, payload, meta }) => {
+        const othersEngineer = state.engineerList.filter(
+          (engineer) => engineer.id !== meta.arg
+        );
+        state.engineerList = othersEngineer;
+        state.deleteEngineerError = null;
+        state.deleteEngineerLoading = false;
       }
     );
   },
