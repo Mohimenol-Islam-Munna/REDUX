@@ -63,17 +63,18 @@ const userSlice = createSlice({
     );
 
     // fetch all
-    builder.addCase(
-      fetchAllEngineerAction.pending,
-      (state, { type, payload }) => {
-        console.log("fetch all Engineer pending");
-      }
-    );
+    builder.addCase(fetchAllEngineerAction.pending, (state) => {
+      console.log("fetch all Engineer pending");
+      state.fetchAllEngineerLoading = true;
+    });
 
     builder.addCase(
       fetchAllEngineerAction.rejected,
       (state, { type, payload }) => {
         console.log("fetch all Engineer rejected");
+        state.fetchAllEngineerError = payload;
+        state.engineerList = null;
+        state.fetchAllEngineerLoading = false;
       }
     );
 
@@ -81,6 +82,8 @@ const userSlice = createSlice({
       fetchAllEngineerAction.fulfilled,
       (state, { type, payload }) => {
         state.engineerList = payload.data;
+        state.fetchAllEngineerError = null;
+        state.fetchAllEngineerLoading = false; 
       }
     );
 
