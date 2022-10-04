@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
 
-// create user
+// create engineer 
 export const createEngineerAction = createAsyncThunk(
   `engineer/createEngineer`,
   async (data) => {
