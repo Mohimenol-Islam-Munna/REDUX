@@ -28,7 +28,7 @@ const initialState = {
   engineerData: null,
 };
 
-const userSlice = createSlice({
+const engineerSlice = createSlice({
   name: "engineer",
   initialState,
   reducers: {},
@@ -158,4 +158,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice;
+export default engineerSlice;
