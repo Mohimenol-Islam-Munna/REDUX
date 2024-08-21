@@ -1,7 +1,2 @@
-WITH_NEXTJS/USE_REACT_REDUX/node_modules
-WITH_NEXTJS/USE_REDUX_TOOLKIT/node_modules
-WITH_NEXTJS/USE_TOOLKIT_RTKQ/node_modules
-
-WITH_REACTJS/USE_REACT_REDUX/node_modules
-WITH_REACTJS/USE_REDUX_TOOLKIT/node_modules
-WITH_REACTJS/USE_RTK_QUERY/node_modules
+**/node_modules
+*.env
